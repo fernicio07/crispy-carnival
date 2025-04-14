@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './product-card.component.html',
-  styleUrl: './product-card.component.css'
+  styleUrls: ['./product-card.component.css']
 })
 export class ProductCardComponent {
-
+  @Input() product!: Product;
+  @Output() productSelected = new EventEmitter<number>();
+  
+  onSelectProduct(): void {
+    this.productSelected.emit(this.product.id);
+  }
 }
